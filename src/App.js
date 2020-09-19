@@ -1,15 +1,18 @@
 import React from "react";
 import Header from "./components/Header";
+import Gallery from "./components/Gallery";
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <p>Hi there!</p>
-            </header>
-            <Header />
-        </div>
-    );
+class App extends React.Component {
+    render() {
+        return (
+            <div className="App">
+                <Header />
+                <div className="message__container"></div>
+                <div className="searchresults"></div>
+                <Gallery />
+            </div>
+        );
+    }
 }
 
 export default App;
