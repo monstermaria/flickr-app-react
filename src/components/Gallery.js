@@ -5,6 +5,9 @@ class Gallery extends React.Component {
     hideGallery = (event) => {
         if (event.target.classList.contains("gallery")) {
             event.target.classList.remove("visible");
+            document
+                .querySelector(".searchresults")
+                .classList.remove("clipped");
         }
     };
 

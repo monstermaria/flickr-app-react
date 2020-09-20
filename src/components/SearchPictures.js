@@ -29,7 +29,6 @@ class SearchPictures extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         this.getPictures(this.state.searchTerm);
-        this.setState({ searchTerm: "" });
     };
 
     render() {

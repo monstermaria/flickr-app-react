@@ -5,6 +5,7 @@ import SearchPictures from "./SearchPictures";
 class Header extends React.Component {
     showGallery = () => {
         document.querySelector(".gallery").classList.add("visible");
+        document.querySelector(".searchresults").classList.add("clipped");
     };
 
     render() {
