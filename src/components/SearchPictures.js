@@ -41,6 +41,7 @@ class SearchPictures extends React.Component {
                     placeholder="Search flickr for photos..."
                     className="searchfield__input"
                     onChange={this.onChange}
+                    autoFocus
                 />
                 <input
                     className="searchfield__submit-button"
