@@ -5,8 +5,6 @@ class SearchPictures extends React.Component {
     state = { searchTerm: "" };
 
     getPictures(searchTerm) {
-        console.log(searchTerm);
-
         const flickrSearchUrl =
             "https://api.flickr.com/services/rest/?method=flickr.photos.search&" +
             "api_key=b54580f369a7eeebecb2004dc429d08f&format=json&nojsoncallback=1";
