@@ -7,19 +7,20 @@ class SearchPictures extends React.Component {
     getPictures(searchTerm) {
         console.log(searchTerm);
 
-        let flickrSearchUrl =
-            "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=b54580f369a7eeebecb2004dc429d08f&format=json&nojsoncallback=1";
+        const flickrSearchUrl =
+            "https://api.flickr.com/services/rest/?method=flickr.photos.search&" +
+            "api_key=b54580f369a7eeebecb2004dc429d08f&format=json&nojsoncallback=1";
 
-        fetch(flickrSearchUrl)
-            .then((result) => {
-                let something = result.body.getReader().read();
-                console.log(something);
-                something.then((result) => {
-                    console.log(result);
-                });
+        const searchUrl = `${flickrSearchUrl}&text=${searchTerm}`;
+
+        fetch(searchUrl)
+            .then((response) => {
+                return response.json();
             })
-            .finally(() => {
-                this.props.setSearchResult(null);
+            .then((json) => {
+                json.photos &&
+                    json.photos.photo &&
+                    this.props.setSearchResult(json.photos.photo);
             });
     }
 
