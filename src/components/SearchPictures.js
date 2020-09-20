@@ -19,6 +19,10 @@ class SearchPictures extends React.Component {
                 json.photos &&
                     json.photos.photo &&
                     this.props.setSearchResult(json.photos.photo);
+            })
+            .catch((error) => {
+                console.log("Oops! Something went wrong...");
+                console.log(error);
             });
     }
 
