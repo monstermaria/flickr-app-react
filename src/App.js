@@ -34,7 +34,7 @@ class App extends React.Component {
     addToGallery = (urlToAdd) => {
         this.setState({
             gallery: [...this.state.gallery, urlToAdd],
-            searchResults: this.state.searchResult.map((photoInfo) => {
+            searchResult: this.state.searchResult.map((photoInfo) => {
                 if (urlToAdd === photoInfo.url) {
                     photoInfo.selected = true;
                     return photoInfo;
@@ -49,7 +49,7 @@ class App extends React.Component {
             gallery: this.state.gallery.filter((url) => {
                 return url !== urlToRemove;
             }),
-            searchResults: this.state.searchResult.map((photoInfo) => {
+            searchResult: this.state.searchResult.map((photoInfo) => {
                 if (urlToRemove === photoInfo.url) {
                     photoInfo.selected = false;
                     return photoInfo;
