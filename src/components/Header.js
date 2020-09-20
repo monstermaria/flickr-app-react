@@ -1,20 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
+import SearchPictures from "./SearchPictures";
 
 class Header extends React.Component {
     render() {
         return (
-            <div className="Header">
+            <div className="controls">
                 <div className="logo__wrapper"></div>
-                <div className="searchfield">
-                    <input
-                        type="text"
-                        placeholder="Search flickr for photos..."
-                        className="searchfield__input"
-                    />
-                    <button className="searchfield__submit-button">
-                        Search
-                    </button>
-                </div>
+                <SearchPictures setSearchResult={this.props.setSearchResult} />
                 <div className="gallery-button__wrapper">
                     <button className="gallery-button">Show Gallery</button>
                 </div>
@@ -22,5 +15,9 @@ class Header extends React.Component {
         );
     }
 }
+
+Header.propTypes = {
+    setSearchResult: PropTypes.func.isRequired
+};
 
 export default Header;
