@@ -47,6 +47,7 @@ class App extends React.Component {
     };
 
     removeFromGallery = (urlToRemove) => {
+        // console.log(urlToRemove);
         this.setState({
             gallery: this.state.gallery.filter((url) => {
                 return url !== urlToRemove;
@@ -71,7 +72,10 @@ class App extends React.Component {
                     addToGallery={this.addToGallery}
                     removeFromGallery={this.removeFromGallery}
                 />
-                <Gallery />
+                <Gallery
+                    photos={this.state.gallery}
+                    removeFromGallery={this.removeFromGallery}
+                />
             </div>
         );
     }

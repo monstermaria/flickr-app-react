@@ -7,8 +7,8 @@ class SearchResults extends React.Component {
     }
 
     toggleSelected = (event) => {
-        console.log(event.target);
-        event.stopPropagation();
+        // console.log(event.target);
+        // event.stopPropagation();
         const classList = event.target.classList;
         if (classList.contains("selected")) {
             classList.remove("selected");
