@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 class Gallery extends React.Component {
     hideGallery = (event) => {
-        console.log("gallery clicked");
         if (event.target.classList.contains("gallery")) {
-            console.log("gallery found, hiding it");
             event.target.classList.remove("visible");
         }
     };
@@ -28,7 +26,6 @@ class Gallery extends React.Component {
     };
 
     previousItem = (event) => {
-        console.log("previous");
         const current = document.querySelector(".gallery__list .visible");
         if (current && current.previousElementSibling) {
             current.classList.remove("visible");
@@ -37,7 +34,6 @@ class Gallery extends React.Component {
     };
 
     nextItem = (event) => {
-        console.log("next");
         const current = document.querySelector(".gallery__list .visible");
         if (current && current.nextElementSibling) {
             current.classList.remove("visible");
@@ -46,20 +42,10 @@ class Gallery extends React.Component {
     };
 
     render() {
-        // console.log(this.props.photos);
         return (
             <div className="gallery" onClick={this.hideGallery}>
-                <div
-                    className="gallery__content"
-                    onClick={(event) => {
-                        console.log("gallery__content clicked");
-                    }}
-                >
-                    <div
-                        className="gallery__controls"
-                        onClick={() => console.log("gallery__controls clicked")}
-                    >
-                        {/* <!-- <div class='gallery__control-spacer'></div> --> */}
+                <div className="gallery__content">
+                    <div className="gallery__controls">
                         <button
                             className="gallery__control-left"
                             onClick={this.previousItem}
@@ -72,7 +58,6 @@ class Gallery extends React.Component {
                         >
                             {">"}
                         </button>
-                        {/* <!-- <a class='gallery__control-removeall'>Remove all</a> --> */}
                     </div>
                     <ul className="gallery__list">
                         {this.props.photos.map(this.getListItem)}

@@ -23,8 +23,6 @@ class App extends React.Component {
                     photoInfo.secret +
                     "_m.jpg";
                 return {
-                    // url: `https://farm${photoInfo.farm}.staticflickr.com/${photoInfo.server}
-                    // /${photoInfo.id}_${photoInfo.secret}_m.jpg`,
                     url: url,
                     title: photoInfo.title,
                     selected: url in this.state.gallery
@@ -47,7 +45,6 @@ class App extends React.Component {
     };
 
     removeFromGallery = (urlToRemove) => {
-        // console.log(urlToRemove);
         this.setState({
             gallery: this.state.gallery.filter((url) => {
                 return url !== urlToRemove;
