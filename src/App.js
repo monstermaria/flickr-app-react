@@ -6,7 +6,8 @@ import Gallery from "./components/Gallery";
 class App extends React.Component {
     state = {
         searchResult: [],
-        gallery: []
+        gallery: [],
+        currentPicture: 0
     };
 
     setSearchResult = (searchResult) => {
@@ -45,7 +46,19 @@ class App extends React.Component {
     };
 
     removeFromGallery = (urlToRemove) => {
+        // if the picture to remove is the last one in the gallery,
+        // and it is the current picture,
+        // make the previous picture the current one
+        const lastPictureIndex = this.state.gallery.length - 1;
+        const urlLastPicture = this.state.gallery[lastPictureIndex];
+        let currentPicture = this.state.currentPicture;
+
+        if (urlToRemove === urlLastPicture && currentPicture > 0) {
+            currentPicture--;
+        }
+
         this.setState({
+            currentPicture,
             gallery: this.state.gallery.filter((url) => {
                 return url !== urlToRemove;
             }),
@@ -57,6 +70,21 @@ class App extends React.Component {
                 return photoInfo;
             })
         });
+    };
+
+    updateCurrentPicture = (direction) => {
+        const currentPicture = this.state.currentPicture;
+
+        if (direction === "previous") {
+            if (currentPicture > 0) {
+                this.setState({ currentPicture: currentPicture - 1 });
+            }
+        }
+        if (direction === "next") {
+            if (currentPicture < this.state.gallery.length - 1) {
+                this.setState({ currentPicture: currentPicture + 1 });
+            }
+        }
     };
 
     render() {
@@ -71,6 +99,8 @@ class App extends React.Component {
                 />
                 <Gallery
                     photos={this.state.gallery}
+                    currentPicture={this.state.currentPicture}
+                    updateCurrentPicture={this.updateCurrentPicture}
                     removeFromGallery={this.removeFromGallery}
                 />
             </div>

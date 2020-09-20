@@ -9,7 +9,7 @@ class Gallery extends React.Component {
     };
 
     getListItem = (url, index) => {
-        const visibility = index === 0 ? "visible" : "";
+        const visibility = index === this.props.currentPicture ? "visible" : "";
         const bigUrl = url.replace(/(_m\.jpg$)/, ".jpg");
 
         return (
@@ -25,22 +25,6 @@ class Gallery extends React.Component {
         );
     };
 
-    previousItem = (event) => {
-        const current = document.querySelector(".gallery__list .visible");
-        if (current && current.previousElementSibling) {
-            current.classList.remove("visible");
-            current.previousElementSibling.classList.add("visible");
-        }
-    };
-
-    nextItem = (event) => {
-        const current = document.querySelector(".gallery__list .visible");
-        if (current && current.nextElementSibling) {
-            current.classList.remove("visible");
-            current.nextElementSibling.classList.add("visible");
-        }
-    };
-
     render() {
         return (
             <div className="gallery" onClick={this.hideGallery}>
@@ -48,13 +32,19 @@ class Gallery extends React.Component {
                     <div className="gallery__controls">
                         <button
                             className="gallery__control-left"
-                            onClick={this.previousItem}
+                            onClick={this.props.updateCurrentPicture.bind(
+                                null,
+                                "previous"
+                            )}
                         >
                             {"<"}
                         </button>
                         <button
                             className="gallery__control-right"
-                            onClick={this.nextItem}
+                            onClick={this.props.updateCurrentPicture.bind(
+                                null,
+                                "next"
+                            )}
                         >
                             {">"}
                         </button>
@@ -70,6 +60,8 @@ class Gallery extends React.Component {
 
 Gallery.propTypes = {
     photos: PropTypes.array.isRequired,
+    currentPicture: PropTypes.number.isRequired,
+    updateCurrentPicture: PropTypes.func.isRequired,
     removeFromGallery: PropTypes.func.isRequired
 };
 
