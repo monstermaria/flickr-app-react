@@ -4,11 +4,22 @@ import SearchResults from "./components/SearchResults";
 import Gallery from "./components/Gallery";
 
 function loadGallery() {
-    const galleryJSON = localStorage.flickrGallery;
-    // console.log(galleryJSON);
-    const gallery = JSON.parse(galleryJSON);
-    // console.log(gallery);
-    return gallery;
+    try {
+        const galleryJSON = localStorage.flickrGallery;
+        // no gallery saved yet, galleryJSON is undefined
+        if (!galleryJSON) {
+            return [];
+        }
+        const gallery = JSON.parse(localStorage.flickrGallery);
+        if (!Array.isArray(gallery)) {
+            throw new Error("Parsed JSON is not an array");
+        }
+        return gallery;
+    } catch (error) {
+        console.log("Unable to read gallery from local storage");
+        console.log(error);
+        return [];
+    }
 }
 
 class App extends React.Component {
