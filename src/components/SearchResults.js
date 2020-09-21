@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 
 class SearchResults extends React.Component {
     toggleSelected = (event) => {
-        const classList = event.target.classList;
+        // currentTarget is the li-element, target is the img-element
+        const classList = event.currentTarget.classList;
         if (classList.contains("selected")) {
-            classList.remove("selected");
             this.props.removeFromGallery(event.target.src);
         } else {
-            classList.add("selected");
             this.props.addToGallery(event.target.src);
         }
     };
