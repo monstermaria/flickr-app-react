@@ -1,5 +1,4 @@
 import React from "react";
-import { HashRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header";
 import SearchResults from "./components/SearchResults";
 import Gallery from "./components/Gallery";
@@ -124,42 +123,21 @@ class App extends React.Component {
 
     render() {
         return (
-            <Router>
-                <Route
-                    path="/"
-                    render={(props) => {
-                        return (
-                            <React.Fragment>
-                                <div>
-                                    <Header
-                                        setSearchResult={this.setSearchResult}
-                                    />
-                                    <div className="message__container"></div>
-                                    <SearchResults
-                                        photos={this.state.searchResult}
-                                        addToGallery={this.addToGallery}
-                                        removeFromGallery={
-                                            this.removeFromGallery
-                                        }
-                                    />
-                                    <Gallery
-                                        photos={this.state.gallery}
-                                        currentPicture={
-                                            this.state.currentPicture
-                                        }
-                                        updateCurrentPicture={
-                                            this.updateCurrentPicture
-                                        }
-                                        removeFromGallery={
-                                            this.removeFromGallery
-                                        }
-                                    />
-                                </div>
-                            </React.Fragment>
-                        );
-                    }}
+            <div>
+                <Header setSearchResult={this.setSearchResult} />
+                <div className="message__container"></div>
+                <SearchResults
+                    photos={this.state.searchResult}
+                    addToGallery={this.addToGallery}
+                    removeFromGallery={this.removeFromGallery}
                 />
-            </Router>
+                <Gallery
+                    photos={this.state.gallery}
+                    currentPicture={this.state.currentPicture}
+                    updateCurrentPicture={this.updateCurrentPicture}
+                    removeFromGallery={this.removeFromGallery}
+                />
+            </div>
         );
     }
 }
