@@ -3,10 +3,18 @@ import Header from "./components/Header";
 import SearchResults from "./components/SearchResults";
 import Gallery from "./components/Gallery";
 
+function loadGallery() {
+    const galleryJSON = localStorage.flickrGallery;
+    // console.log(galleryJSON);
+    const gallery = JSON.parse(galleryJSON);
+    // console.log(gallery);
+    return gallery;
+}
+
 class App extends React.Component {
     state = {
         searchResult: [],
-        gallery: [],
+        gallery: loadGallery(),
         currentPicture: 0
     };
 
@@ -26,15 +34,25 @@ class App extends React.Component {
                 return {
                     url: url,
                     title: photoInfo.title,
-                    selected: url in this.state.gallery
+                    selected: this.state.gallery.includes(url)
                 };
             })
         });
     };
 
     addToGallery = (urlToAdd) => {
+        // add photo only if it is not already in the gallery
+        if (this.state.gallery.includes(urlToAdd)) {
+            return;
+        }
+
+        // save the updated gallery
+        const newGallery = [...this.state.gallery, urlToAdd];
+        localStorage.flickrGallery = JSON.stringify(newGallery);
+
+        // update state
         this.setState({
-            gallery: [...this.state.gallery, urlToAdd],
+            gallery: newGallery,
             searchResult: this.state.searchResult.map((photoInfo) => {
                 if (urlToAdd === photoInfo.url) {
                     photoInfo.selected = true;
@@ -57,11 +75,16 @@ class App extends React.Component {
             currentPicture--;
         }
 
+        // save the updated gallery
+        const newGallery = this.state.gallery.filter((url) => {
+            return url !== urlToRemove;
+        });
+        localStorage.flickrGallery = JSON.stringify(newGallery);
+
+        // update state
         this.setState({
             currentPicture,
-            gallery: this.state.gallery.filter((url) => {
-                return url !== urlToRemove;
-            }),
+            gallery: newGallery,
             searchResult: this.state.searchResult.map((photoInfo) => {
                 if (urlToRemove === photoInfo.url) {
                     photoInfo.selected = false;
